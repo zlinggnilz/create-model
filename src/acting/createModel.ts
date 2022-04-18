@@ -1,4 +1,4 @@
-import { get } from './utils';
+import get from 'lodash.get';
 import * as services from './service';
 import { EffectsMapObject, ReducersMapObjectWithEnhancer } from 'dva';
 
@@ -27,7 +27,10 @@ export interface CreateModelType {
   // subscriptions?: SubscriptionsMapObject,
 }
 
-export function createModel(apis: ApisType, defaultModel = {}): CreateModelType {
+export function createModel(
+  apis: ApisType,
+  defaultModel = {},
+): CreateModelType {
   const defaultState = get(defaultModel, 'state') || {};
   const defulatEffects: EffectsMapObject = get(defaultModel, 'effects') || {};
   const defaultReducer = get(defaultModel, 'reducers') || {};

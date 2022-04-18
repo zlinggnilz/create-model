@@ -1,11 +1,10 @@
-
-interface configProps{
-  request?: any
+interface configProps {
+  request?: any;
 }
 
-const defaultConfig : configProps= {};
+const defaultConfig: configProps = {};
 
-const config = ({ request} : configProps) => {
+const config = ({ request }: configProps) => {
   defaultConfig.request = request;
 };
 

@@ -25,7 +25,8 @@ const getUrl = (url: String, params?: Object, replace?: replaceType) => {
 };
 
 export async function get(method = 'get', apiUrl: string, payload: any) {
-  const { params, replace, data, ...rest } = payload || {};
+  const { _params: params, _replace: replace, _data: data, ...rest } =
+    payload || {};
   const url = getUrl(apiUrl, undefined, replace);
   return defaultConfig.request(url, {
     method,
@@ -34,7 +35,8 @@ export async function get(method = 'get', apiUrl: string, payload: any) {
 }
 
 export async function post(method = 'post', apiUrl: string, payload: any) {
-  const { params, replace, data, ...rest } = payload || {};
+  const { _params: params, _replace: replace, _data: data, ...rest } =
+    payload || {};
   const url = getUrl(apiUrl, params, replace);
   return defaultConfig.request(url, { method, data: { ...data, ...rest } });
 }
@@ -56,7 +58,8 @@ export async function http({ api, payload }: any) {
 // }
 
 export async function httpBlob({ api, payload }: any) {
-  const { params, replace, data, ...rest } = payload || {};
+  const { _params: params, _replace: replace, _data: data, ...rest } =
+    payload || {};
   const url = getUrl(api.url, params, replace);
   return defaultConfig
     .request(url, {
