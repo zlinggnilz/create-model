@@ -37,7 +37,7 @@ export const demoSidApi = {
 // 考虑到请求拦截都写的各不相同, 没有将 request 一起封装
 // 若有更好的想法, 欢迎提出
 import { config } from 'create-model';
-import request from '../request'
+import service from '../request'
 
 config({ request: service })
 ```
