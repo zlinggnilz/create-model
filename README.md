@@ -4,14 +4,18 @@
 
 > 根据 api 生成 model
 
+### Demo
+
+📙 [create-model-demo](https://github.com/zlinggnilz/create-model-demo)
+
 ### api 文件
 
 ```js
 // ----- api 文件 ----- //
 // 简易, 默认为 get 请求
 export const demoTest = {
-  url: '/api/test'
-}; 
+  url: '/api/test',
+};
 
 // 全部属性
 export const demoSidApi = {
@@ -20,7 +24,8 @@ export const demoSidApi = {
   url: '/api/getDetail/{sid}', // url 上有需要替换的参数
   payload: null, // 请求时需携带的默认参数
   promise: false, // effects 是否返回promise, 默认 false
-  handleValue: (data, payload) => { // 在 state 中保存处理后的数据
+  handleValue: (data, payload) => {
+    // 在 state 中保存处理后的数据
     let newData = data;
     // 处理data, 返回处理后的数据
     return newData;
@@ -31,18 +36,23 @@ export const demoSidApi = {
 ```
 
 ### config 设置 request
+
 ```js
 // 需提供 request
 // 在最外层 或 所有请求之前设置 request
 // 考虑到请求拦截都写的各不相同, 没有将 request 一起封装
 // 若有更好的想法, 欢迎提出
 import { config } from 'create-model';
-import service from '../request'
+import service from '../request';
 
-config({ request: service })
+config({ request: service });
 ```
 
+> **重要**  
+> **request 请求后，返回结果需包含 `data`，如 `{ data:{ userId:'111'}, code:0 }`，`createModel` 将保存 `data` 到 `state`。需要在 response 拦截器中处理好。**
+
 ### model 文件
+
 ```js
 // ----- models/demo.js ----- //
 import { createModel } from 'create-model';
@@ -75,13 +85,12 @@ dispatch({
   },
 });
 
-
 // 如果不需要执行 replace, 可以直接将入参写在 payload 里
 
 // 基础示例
 dispatch({
   type: 'common/demoTest',
-  payload: { status: 1 } // 没有写在 _data 中的数据也会提交给请求
+  payload: { status: 1 }, // 没有写在 _data 中的数据也会提交给请求
 });
 
 // 返回Promise

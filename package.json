@@ -1,7 +1,7 @@
 {
   "name": "create-model",
   "author": "Ling",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "scripts": {
     "dev": "father-build --w",
     "build": "father-build",
@@ -43,7 +43,7 @@
     "father-build": "^1.19.1",
     "gh-pages": "^3.0.0",
     "lint-staged": "^10.0.7",
-    "prettier": "^1.19.1",
+    "prettier": "^2.7.1",
     "yorkie": "^2.0.0"
   },
   "description": "create model",

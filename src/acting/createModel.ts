@@ -1,6 +1,6 @@
 import get from 'lodash.get';
 import * as services from './service';
-import { EffectsMapObject, ReducersMapObjectWithEnhancer } from 'dva';
+import type { EffectsMapObject, ReducersMapObjectWithEnhancer } from 'dva';
 
 type Method = 'get' | 'post' | 'delete' | 'put';
 
@@ -29,19 +29,19 @@ export interface CreateModelType {
 
 export function createModel(
   apis: ApisType,
-  defaultModel = {},
+  defaultModel: any = {},
 ): CreateModelType {
   const defaultState = get(defaultModel, 'state') || {};
   const defulatEffects: EffectsMapObject = get(defaultModel, 'effects') || {};
   const defaultReducer = get(defaultModel, 'reducers') || {};
 
-  Object.keys(apis).forEach(key => {
+  Object.keys(apis).forEach((key) => {
     const item = apis[key];
     const hasDefault = item.hasOwnProperty('default');
     if (hasDefault) {
       defaultState[key] = item.default;
     }
-    defulatEffects[key] = function*({ payload }, { put, select, call }) {
+    defulatEffects[key] = function* ({ payload }, { put, select, call }): any {
       if (item.error) {
         yield put({
           type: 'save',
